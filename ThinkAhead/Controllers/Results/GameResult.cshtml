@@ -1,0 +1,31 @@
+﻿@using ThinkAhead.Application
+@using ThinkAhead.Views
+@model ThinkAhead.Controllers.Results.GameResult
+@{
+    Layout = "_Game";
+}
+
+<div id="board" class="chessBoard @Model.CurrentPlayer">
+    @Html.ChessBoard(Model.Fen)
+</div>
+@if (Model.State is GameState.Active)
+{
+    <div class="moves">
+        @foreach (var move in Model.Moves)
+        {
+            <a class="move" href="/game/@Model.Id/preview/@Html.UrlEncoder.Encode(move.San)">@Html.ChessPiece(move.Piece) @move.San</a>
+        }
+    </div>
+}
+else if(Model.State is GameState.Draw)
+{
+    <h2>Draw!</h2>
+}
+else if (Model.State is GameState.BlackWinning)
+{
+    <h2>Black wins!</h2>
+}
+else if (Model.State is GameState.WhiteWinning)
+{
+    <h2>White wins!</h2>
+}

@@ -28,9 +28,6 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
-
 # NuGet Packages
 *.nupkg
 # NuGet Symbol Packages
@@ -40,18 +37,11 @@ ScaffoldingReadMe.txt
 .env
 
 # Others
+.vs
 ~$*
 *~
 CodeCoverage/
 
-# MSBuild Binary and Structured Log
-*.binlog
-
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
-
-# NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml

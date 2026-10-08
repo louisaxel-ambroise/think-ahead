@@ -1,0 +1,39 @@
+﻿@using ThinkAhead.Views
+@model ThinkAhead.Controllers.Results.PreviewResult
+@{
+    Layout = "_Game";
+}
+
+<div id="board" class="chessBoard @Model.CurrentPlayer">
+    @Html.ChessBoard(Model.Fen, Model.SelectedMove.AffectedPositions)
+</div>
+<div class="moves">
+@foreach (var move in Model.Moves)
+{
+    var isSelected = Model.SelectedMove.San == move.San;
+
+        if (isSelected)
+        {
+            <a class="move selected" href="/game/@Model.Id">@Html.ChessPiece(move.Piece) @move.San</a>
+        }
+        else
+        {
+            <a class="move" href="/game/@Model.Id/preview/@Html.UrlEncoder.Encode(move.San)">@Html.ChessPiece(move.Piece) @move.San</a>
+        }
+}
+</div>
+<div id="thinkahead">
+    <h3>Your opponent will get:</h3>
+    <div class="moves">
+    @foreach (var move in Model.NextMoves)
+    {
+        <span class="move">@move.San</span>
+    }
+    </div>
+</div>
+
+@using(Html.BeginForm("Play", "Game", new { id = Model.Id }, FormMethod.Post))
+{
+    <input type="hidden" name="san" value="@Model.SelectedMove.San" />
+    <button class="button" type="submit" onclick="this.form.submit(); this.disabled=true; this.value='Playing move...'; ">Play @Model.SelectedMove.San</button>
+}

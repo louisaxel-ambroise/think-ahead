@@ -1,0 +1,11 @@
+{
+  "dependentFileProviders": {
+    "add": {
+      "fileSuffixToExtension": {
+        "add": {
+          ".cshtml": [ ".cs" ]
+        }
+      }
+    }
+  }
+}
