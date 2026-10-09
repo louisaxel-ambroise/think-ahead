@@ -13,7 +13,7 @@
     <div class="moves">
         @foreach (var move in Model.Moves)
         {
-            <a class="move" href="/game/@Model.Id/preview/@Html.UrlEncoder.Encode(move.San)">@Html.ChessPiece(move.Piece) @move.San</a>
+            <a class="move" href="/game/@Model.Id/preview/@Html.UrlEncoder.Encode(move.San)">@Html.ChessPiece(move.Piece, Model.CurrentPlayer) @move.San</a>
         }
     </div>
 }

@@ -2,7 +2,7 @@
 
 public sealed class PreviewResult
 {
-    public required int Id { get; init; }
+    public required string Id { get; init; }
     public required string Fen { get; init; }
     public required string CurrentPlayer { get; set; }
     public required SelectedMove SelectedMove { get; set; }

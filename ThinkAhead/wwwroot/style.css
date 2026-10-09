@@ -30,14 +30,18 @@ header {
     line-height: 37px;
     border-bottom: 2px solid rgba(0,0,0,0.13);
     display: flex;
+    justify-content: space-between;
+    padding:0 7px;
     user-select: none;
 
-    & a.logo {
+    & a {
         display: block;
-        padding-left: 7px;
-        font-weight: 700;
         color: #000;
         text-decoration: none;
+    }
+
+    & .logo {
+        font-weight: 700;
 
         & span {
             display: inline-block;
@@ -53,11 +57,19 @@ header {
             margin-right: 3px;
         }
     }
+
+    & menu{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap:10px;
+        font-size:95%;
+        opacity:.8
+    }
 }
 
 main {
     padding: clamp(20px, 5%, 25px);
-    padding-bottom:0;
+    padding-bottom: 0;
     display: grid;
     gap: 20px;
 
@@ -71,12 +83,17 @@ main {
             display: inline-block;
             width: 54px;
             height: 54px;
+            margin-right:10px;
             background: var(--main);
             aspect-ratio: 1;
             border-radius: 13px;
             color: #fff;
             box-shadow: 0 0 8px rgba(0,0,0, 0.3);
         }
+    }
+
+    & p a, p a:visited{
+        color:var(--main);
     }
 
     & h2 {
@@ -87,15 +104,17 @@ main {
     & .chessBoard {
         border: 5px solid white;
         border-radius: 5px;
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        display: flex;
+        flex-flow: wrap;
         container-type: inline-size;
         user-select: none;
         color: #000000;
         margin-bottom: 15px;
+        box-shadow: 5px -5px 12px rgba(0,0,0, 0.3);
 
         & div {
             aspect-ratio: 1;
+            width: calc(100%/8);
             display: grid;
             place-items: center;
             font-weight: 400;
@@ -125,10 +144,15 @@ main {
 
         & div:before {
             content: attr(col);
+            left: calc(-100% - 12px);
+            width: 100%;
+            text-align: right;
         }
 
         & div:after {
             content: attr(row);
+            top: calc(100% + 9px);
+            text-align: right;
         }
 
         & div[row] {
@@ -140,37 +164,17 @@ main {
         }
     }
 
-        & .chessBoard.white {
-            box-shadow: 5px -5px 12px rgba(0,0,0, 0.3);
-
-            & div:before {
-                left: calc(-100% - 12px);
-                width: 100%;
-                text-align: right;
-            }
-
-            & div:after {
-                top: calc(100% + 9px);
-                text-align: right;
-            }
-        }
-
         & .chessBoard.black {
-            box-shadow: -5px 5px 12px rgba(0,0,0, 0.3);
-
-            & div:before {
-                right: calc(800% + clamp(7px, 2dvh, 12px));
-                text-align: left;
-            }
+            flex-flow: wrap-reverse;
+            direction: rtl;
 
             & div:after {
-                text-align: right;
-                top: calc(800% + 9px)
+                top: calc(800% + 9px);
             }
-        }
 
-        & .chessBoard.black, .chessBoard.black div {
-            transform: rotateZ(180deg);
+            & div:before {
+                left: calc(-800% - 12px);
+            }
         }
 
     & .moves {
@@ -244,7 +248,7 @@ main {
         font-weight: 600;
         line-height: 35px;
         margin-top: 10px;
-        margin-bottom:3px;
+        margin-bottom: 3px;
         cursor: pointer;
         border-radius: 8px;
         color: #fefefe;

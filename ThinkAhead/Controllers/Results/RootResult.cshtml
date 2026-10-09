@@ -1,5 +1,4 @@
-﻿@model ThinkAhead.Controllers.Results.RootResult
-@{
+﻿@{
     Layout = "_Layout";
     ViewData["Title"] = "♞ - Chessboard";
 }
@@ -7,9 +6,9 @@
 <h1><span>♞</span> Think Ahead</h1>
 
 <p>It's a <strong>chess</strong> game.</p>
-<p>Except you only get <strong>5 moves</strong> to choose from.</p>
-<p>You get to see the moves your opponent will have to choose from after your turn.</p>
-<p><strong>Choose wisely!</strong></p>
+<p>Except you only have <strong>5 moves</strong> available.</p>
+<p>You get to see the what your opponent could play from after your turn.</p>
+<p><strong>Think Ahead. Choose wisely!</strong></p>
 
 @using(Html.BeginForm("Create", "Game", FormMethod.Post))
 {

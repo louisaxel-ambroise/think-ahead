@@ -4,21 +4,23 @@ using ThinkAhead.Controllers.Requests;
 using ThinkAhead.Application.Data;
 using ThinkAhead.Views;
 using ThinkAhead.Controllers.Results;
+using Sqids;
 
 namespace ThinkAhead.Controllers;
 
 [Controller]
 [Route("game")]
-public class GameController(GameRepository gameRepository)
+public class GameController(GameRepository gameRepository, SqidsEncoder<int> encoder)
 {
     [HttpGet("{id}")]
-    public IActionResult LoadGame(int id)
+    public IActionResult LoadGame(string id)
     {
-        var game = gameRepository.Load(id);
+        var gameId = encoder.Decode(id).Single();
+        var game = gameRepository.Load(gameId);
 
         return new OkObjectResult(new GameResult
         {
-            Id = game.Id,
+            Id = id,
             Fen = game.Fen,
             CurrentPlayer = game.CurrentPlayer,
             State = game.State,
@@ -27,14 +29,15 @@ public class GameController(GameRepository gameRepository)
     }
 
     [HttpGet("{id}/preview/{san}")]
-    public PreviewResult PreviewMove(int id, string san)
+    public PreviewResult PreviewMove(string id, string san)
     {
-        var game = gameRepository.Load(id);
+        var gameId = encoder.Decode(id).Single();
+        var game = gameRepository.Load(gameId);
         var projection = game.PreviewMove(san);
 
         return new PreviewResult
         {
-            Id = projection.Id,
+            Id = id,
             Fen = projection.Fen,
             CurrentPlayer = game.CurrentPlayer,
             SelectedMove = new SelectedMove
@@ -51,20 +54,21 @@ public class GameController(GameRepository gameRepository)
     [HttpPost]
     public IActionResult Create()
     {
-        var game = new Game(Random.Shared.Next());
-        gameRepository.Insert(game);
+        var game = new Game(0, DateTimeOffset.UtcNow);
+        var gameId = gameRepository.Insert(game);
 
-        return new RedirectResult($"/game/{game.Id}", false, false);
+        return new RedirectResult($"/game/{encoder.Encode(gameId)}", false, false);
     }
 
     [HttpPost("{id}/play")]
-    public IActionResult Play(int id, [FromForm] PlayMoveRequest request)
+    public IActionResult Play(string id, [FromForm] PlayMoveRequest request)
     {
-        var game = gameRepository.Load(id);
+        var gameId = encoder.Decode(id).Single();
+        var game = gameRepository.Load(gameId);
 
         game.PlayMove(request.San);
         gameRepository.Save(game);
 
-        return new RedirectResult($"/game/{id}", false, false);
+        return new RedirectResult($"/game/{encoder.Encode(gameId)}", false, false);
     }
 }

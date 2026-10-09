@@ -14,11 +14,11 @@
 
         if (isSelected)
         {
-            <a class="move selected" href="/game/@Model.Id">@Html.ChessPiece(move.Piece) @move.San</a>
+            <a class="move selected" href="/game/@Model.Id">@Html.ChessPiece(move.Piece, Model.CurrentPlayer) @move.San</a>
         }
         else
         {
-            <a class="move" href="/game/@Model.Id/preview/@Html.UrlEncoder.Encode(move.San)">@Html.ChessPiece(move.Piece) @move.San</a>
+            <a class="move" href="/game/@Model.Id/preview/@Html.UrlEncoder.Encode(move.San)">@Html.ChessPiece(move.Piece, Model.CurrentPlayer) @move.San</a>
         }
 }
 </div>

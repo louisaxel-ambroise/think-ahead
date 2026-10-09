@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Sqids;
 using ThinkAhead.Controllers.Results;
 
 namespace ThinkAhead.Controllers;
 
 [Route("error")]
-public sealed class ErrorController : Controller
+public sealed class ErrorController(SqidsEncoder<int> encoder) : Controller
 {
     public IActionResult HandleError()
     {
@@ -16,9 +17,9 @@ public sealed class ErrorController : Controller
         {
             return new RedirectResult($"/", false, false);
         }
-        else if (parts.Length >= 2 && parts[0] == "game" && int.TryParse(parts[1], out var gameId))
+        else if (parts.Length >= 2 && parts[0] == "game" && encoder.Decode(parts[1]).Count == 1)
         {
-            return new RedirectResult($"/game/{gameId}", false, false);
+            return new RedirectResult($"/game/{parts[1]}", false, false);
         }
         else
         {

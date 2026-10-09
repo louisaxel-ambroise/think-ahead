@@ -14,7 +14,7 @@ public static class ChessExtensions
 
     private static readonly Dictionary<char, string> PieceName = new()
     {
-        { 'P', "Pawn" }, { 'N', "Knight" }, { 'B', "Bishop" }, { 'R', "Rook" }, { 'Q', "Queen" }, { 'K', "King" }
+        { 'p', "Pawn" }, { 'n', "Knight" }, { 'b', "Bishop" }, { 'r', "Rook" }, { 'q', "Queen" }, { 'k', "King" }
     };
 
     public static string Sanitize(this string san)
@@ -22,14 +22,15 @@ public static class ChessExtensions
         return san.TrimEnd(['+', '#', 'Q', 'N', 'R', 'B', '=', '$']);
     }
 
-    public static IHtmlContent ChessPiece(this IHtmlHelper helper, char piece)
+    public static IHtmlContent ChessPiece(this IHtmlHelper helper, char piece, string currentPlayer)
     {
-        return helper.Raw("<span class=\"piece\" title=\"" + PieceName.GetValueOrDefault(char.ToUpper(piece), string.Empty) + "\">" + PieceSymbols.GetValueOrDefault(piece, string.Empty) + "</span>");
+        var coloredPiece = currentPlayer == "white" ? char.ToUpper(piece) : char.ToLower(piece);
+        return helper.Raw("<span class=\"piece\" title=\"" + PieceName.GetValueOrDefault(piece, string.Empty) + "\">" + PieceSymbols.GetValueOrDefault(coloredPiece, string.Empty) + "</span>");
     }
 
     public static IHtmlContent ChessBoard(this IHtmlHelper helper, string fen, params string[] affectedPositions)
     {
-        
+
         var builder = new StringBuilder();
         var cols = fen.Split(' ')[0].Split('/');
 
@@ -46,11 +47,11 @@ public static class ChessExtensions
                 {
                     className += " highlight";
                 }
-                if(row == 0)
+                if (row == 0)
                 {
                     extra += $"col=\"{col}\"";
                 }
-                if(col == 1)
+                if (col == 1)
                 {
                     extra += $"row=\"{(char)(row + 'a')}\"";
                 }
