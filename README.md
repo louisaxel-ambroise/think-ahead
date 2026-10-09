@@ -19,7 +19,7 @@ Using .NET11, C#, WebAPI controller, cshtml templates, a tiny SQLite database an
 
 The code is kept as small as possible, no over-engineering, no useless abstraction, only the bare minimum. It feels good sometimes.
 
-If you want to test it, just clone the repository and run the project using `dotnet run --project ThinkAhead`. By default the project is hosted at [https://localhost:](https://localhost:7034/)
+If you want to test it, just clone the repository and run the project using `dotnet run --project ThinkAhead`. By default the project is hosted at [https://localhost:7034/](https://localhost:7034/)
 
 ## And now?
 
