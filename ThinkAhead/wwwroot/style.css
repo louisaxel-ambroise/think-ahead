@@ -83,7 +83,7 @@ main {
             display: inline-block;
             width: 54px;
             height: 54px;
-            margin-right:10px;
+            margin-right: 10px;
             background: var(--main);
             aspect-ratio: 1;
             border-radius: 13px;
@@ -92,8 +92,8 @@ main {
         }
     }
 
-    & p a, p a:visited{
-        color:var(--main);
+    & p a, p a:visited {
+        color: var(--main);
     }
 
     & h2 {
@@ -262,4 +262,27 @@ main {
             transform: translateY(-2px);
             box-shadow: 2px 2px 4px #888;
         }
+
+    & div.preview {
+        width: 40%;
+        margin: auto;
+
+        & .chessBoard {
+            margin-bottom: 30px;
+        }
+
+        & a.move, #thinkahead span.move {
+            font-size: .6rem;
+            font-weight: 500;
+
+            & span.piece {
+                font-size: .9rem;
+            }
+        }
+
+        & #thinkahead h3 {
+            margin-top: 10px;
+            font-size: 80%;
+        }
+    }
 }

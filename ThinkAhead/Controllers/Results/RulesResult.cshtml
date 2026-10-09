@@ -5,7 +5,48 @@
 
 <h1><span>♞</span> Rules</h1>
 
-<p>The screen displays only a chess board and a list of moves in the form of <a href="https://en.wikipedia.org/wiki/Algebraic_notation_(chess)#Notation_for_moves" target="_blank">SAN notation</a>.</p>
-<p>When you click on a move, you can see the updated board and the SAN notation of the moves your opponent will have to choose from. Note that the chess, draw, mate and promotion information is not displayed. You need to be able to preview the move mentally to see the final outcome!</p>
-<p>Once you made your choice, simply click on the big green button to validate your move.</p>
+<p id="initial">The screen displays only a chess board and a list of moves in the form of <a href="https://en.wikipedia.org/wiki/Algebraic_notation_(chess)#Notation_for_moves" target="_blank">SAN notation</a>:</p>
+<div class="preview">
+    <div id="board" class="chessBoard black">
+        <div class="light" col="8">♜</div><div class="dark"></div><div class="light">♝</div><div class="dark">♛</div><div class="light">♚</div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="dark" col="7">♟</div><div class="light">♟</div><div class="dark">♟</div><div class="light"></div><div class="dark">♟</div><div class="light"></div><div class="dark">♝</div><div class="light">♜</div><div class="light" col="6"></div><div class="dark"></div><div class="light">♞</div><div class="dark"></div><div class="light"></div><div class="dark">♟</div><div class="light"></div><div class="dark">♞</div><div class="dark" col="5"></div><div class="light"></div><div class="dark"></div><div class="light">♟</div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="light" col="4"></div><div class="dark"></div><div class="light">♙</div><div class="dark"></div><div class="light">♕</div><div class="dark">♙</div><div class="light"></div><div class="dark"></div><div class="dark" col="3"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="light" col="2">♙</div><div class="dark">♙</div><div class="light"></div><div class="dark">♙</div><div class="light">♙</div><div class="dark"></div><div class="light">♙</div><div class="dark">♙</div><div class="dark" col="1" row="a">♖</div><div class="light" row="b">♘</div><div class="dark" row="c">♗</div><div class="light" row="d"></div><div class="dark" row="e">♔</div><div class="light" row="f">♗</div><div class="dark" row="g"></div><div class="light" row="h">♖</div>
+    </div>
+    <div class="moves">
+        <a class="move" href="#initial"><span class="piece" title="Knight">♞</span> Na5</a>
+        <a class="move" href="#initial"><span class="piece" title="King">♚</span> Kf7</a>
+        <a class="move" href="#initial"><span class="piece" title="Knight">♞</span> Nd4</a>
+        <a class="move" href="#initial"><span class="piece" title="Bishop">♝</span> Bd7</a>
+        <a class="move" href="#initial"><span class="piece" title="Bishop">♝</span> Bh3</a>
+    </div>
+</div>
+
+<p id="selected">After clicking on a move, you can see the updated board and the SAN notation of the moves your opponent will have to choose from:</p>
+
+<div class="preview">
+    <div id="board" class="chessBoard black">
+        <div class="light" col="8">♜</div><div class="dark"></div><div class="light">♝</div><div class="dark">♛</div><div class="light">♚</div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="dark" col="7">♟</div><div class="light">♟</div><div class="dark">♟</div><div class="light"></div><div class="dark">♟</div><div class="light"></div><div class="dark">♝</div><div class="light">♜</div><div class="light" col="6"></div><div class="dark"></div><div class="light highlight"></div><div class="dark"></div><div class="light"></div><div class="dark">♟</div><div class="light"></div><div class="dark">♞</div><div class="dark" col="5"></div><div class="light"></div><div class="dark"></div><div class="light">♟</div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="light" col="4"></div><div class="dark"></div><div class="light">♙</div><div class="dark highlight">♞</div><div class="light">♕</div><div class="dark">♙</div><div class="light"></div><div class="dark"></div><div class="dark" col="3"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="dark"></div><div class="light"></div><div class="light" col="2">♙</div><div class="dark">♙</div><div class="light"></div><div class="dark">♙</div><div class="light">♙</div><div class="dark"></div><div class="light">♙</div><div class="dark">♙</div><div class="dark" col="1" row="a">♖</div><div class="light" row="b">♘</div><div class="dark" row="c">♗</div><div class="light" row="d"></div><div class="dark" row="e">♔</div><div class="light" row="f">♗</div><div class="dark" row="g"></div><div class="light" row="h">♖</div>
+    </div>
+    <div class="moves">
+        <a class="move" href="#selected"><span class="piece" title="Knight">♞</span> Na5</a>
+        <a class="move" href="#selected"><span class="piece" title="King">♚</span> Kf7</a>
+        <a class="move selected" href="#selected"><span class="piece" title="Knight">♞</span> Nd4</a>
+        <a class="move" href="#selected"><span class="piece" title="Bishop">♝</span> Bd7</a>
+        <a class="move" href="#selected"><span class="piece" title="Bishop">♝</span> Bh3</a>
+    </div>
+    <div id="thinkahead">
+        <h3>Your opponent will get:</h3>
+        <div class="moves">
+            <span class="move">Qg6</span>
+            <span class="move">a3</span>
+            <span class="move">g4</span>
+            <span class="move">cxd5</span>
+            <span class="move">Qf5</span>
+        </div>
+    </div>
+</div>
+<p><em>Note that there is no chess, draw, mate nor promotion information on your opponent moves. You need to be able to preview the move mentally to see the final outcome!</em></p>
+<p id="play">Once you made your choice, simply click on the big green button to validate your move.</p>
+
+<div class="preview">
+    <button class="button">Play Nd4</button>
+</div>
 <p><strong>Good luck!</strong></p>

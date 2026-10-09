@@ -6,6 +6,7 @@ using ThinkAhead.Controllers.Results;
 namespace ThinkAhead.Controllers;
 
 [Route("error")]
+[Controller]
 public sealed class ErrorController(SqidsEncoder<int> encoder) : Controller
 {
     public IActionResult HandleError()
