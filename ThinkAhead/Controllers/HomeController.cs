@@ -1,17 +1,24 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Sqids;
+using ThinkAhead.Application.Data;
 using ThinkAhead.Controllers.Results;
 
 namespace ThinkAhead.Controllers;
 
 [Route("")]
-public sealed class HomeController
+public sealed class HomeController(GameRepository repository, SqidsEncoder<int> encoder)
 {
     public RootResult Root()
     {
+        var activeGames = repository.LoadPage(5);
+
         return new RootResult
         {
-            Id = Random.Shared.Next()
+            LatestGames = activeGames.Select(g => new GamePreview
+            {
+                Id = encoder.Encode(g.Id),
+                Description = $"{g.CreatedOn:yyyy-MM-dd} - {g.State}"
+            }).ToList()
         };
     }
 

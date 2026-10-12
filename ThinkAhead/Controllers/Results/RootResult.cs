@@ -2,5 +2,11 @@
 
 public class RootResult
 {
-    public int Id { get; set; }
+    public required List<GamePreview> LatestGames { get; set; } = [];
+}
+
+public class GamePreview
+{
+    public required string Id { get; set; }
+    public required string Description { get; set; }
 }

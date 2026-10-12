@@ -10,7 +10,7 @@ public sealed class GameRepository(string connectionString)
         connection.Open();
 
         using var command = connection.CreateCommand();
-        command.CommandText = "SELECT Id, CreatedOn, Pgn FROM Games WHERE Id = @Id";
+        command.CommandText = "SELECT Id, CreatedOn, Seed, Pgn FROM Games WHERE Id = @Id";
         command.Parameters.AddWithValue("@Id", id);
 
         using var reader = command.ExecuteReader();
@@ -19,7 +19,7 @@ public sealed class GameRepository(string connectionString)
             throw new KeyNotFoundException("Game not found");
         }
 
-        return new Game(reader.GetInt32(0), DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64(1)), reader.GetString(2));
+        return new Game(reader.GetInt32(0), DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64(1)), reader.GetInt32(2), reader.GetString(3));
     }
 
     public int Insert(Game game)
@@ -51,5 +51,27 @@ public sealed class GameRepository(string connectionString)
         command.Parameters.AddWithValue("@Id", game.Id);
         command.Parameters.AddWithValue("@Pgn", game.Pgn);
         command.ExecuteNonQuery();
+    }
+
+    public IEnumerable<Game> LoadPage(int pageSize)
+    {
+        
+        using var connection = new SqliteConnection(connectionString);
+        connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT Id, CreatedOn, Seed, Pgn FROM Games ORDER BY CreatedOn DESC LIMIT @PageSize";
+        command.Parameters.AddWithValue("@PageSize", pageSize);
+
+        using var reader = command.ExecuteReader();
+
+        var result = new List<Game>();
+
+        while (reader.Read()) 
+        {
+            result.Add(new Game(reader.GetInt32(0), DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64(1)), reader.GetInt32(2), reader.GetString(3)));
+        }
+
+        return result;
     }
 }

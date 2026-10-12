@@ -54,7 +54,7 @@ public class GameController(GameRepository gameRepository, SqidsEncoder<int> enc
     [HttpPost]
     public IActionResult Create()
     {
-        var game = new Game(0, DateTimeOffset.UtcNow);
+        var game = new Game(0, DateTimeOffset.UtcNow, Random.Shared.Next());
         var gameId = gameRepository.Insert(game);
 
         return new RedirectResult($"/game/{encoder.Encode(gameId)}", false, false);

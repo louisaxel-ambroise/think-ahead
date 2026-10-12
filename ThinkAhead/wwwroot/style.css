@@ -20,7 +20,7 @@ body {
     font-family: math, sans-serif;
     min-height: 100dvh;
     margin: auto;
-    width: clamp(420px, 90dvw, min(700px, calc(65dvh - 35px)));
+    width: clamp(405px, 90dvw, min(700px, calc(65dvh - 35px)));
     box-shadow: 0 0 12px rgba(0,0,0, 0.3);
     overflow-y: scroll;
 }
@@ -283,6 +283,14 @@ main {
         & #thinkahead h3 {
             margin-top: 10px;
             font-size: 80%;
+        }
+    }
+
+    & ul#latestGames{
+        list-style-type: square;
+        line-height:30px;
+        & a{
+            color:var(--main);
         }
     }
 }

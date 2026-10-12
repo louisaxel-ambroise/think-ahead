@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ThinkAhead.Controllers.Results.RootResult
+@{
     Layout = "_Layout";
     ViewData["Title"] = "♞ - Chessboard";
 }
@@ -13,4 +14,20 @@
 @using(Html.BeginForm("Create", "Game", FormMethod.Post))
 {
     <button type="submit" class="submit">Start Game</button>
+}
+
+<h2>Latest games</h2>
+
+@if (Model.LatestGames.Any())
+{
+    <ul id="latestGames">
+    @foreach (var game in Model.LatestGames)
+    {
+        <li><a href="/game/@game.Id">@game.Description - @game.Id</a></li>
+    }
+    </ul>
+}
+else
+{
+    <p>No active game... Start a new one now!</p>
 }
