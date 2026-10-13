@@ -1,0 +1,22 @@
+{
+  "lang": "en",
+  "name": "Think Ahead",
+  "short_name": "ThinkAhead",
+  "start_url": "/",
+  "description": "Small chess-based game.",
+  "theme_color": "#fafafa",
+  "background_color": "#fafafa",
+  "orientation": "portrait",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "68x68"
+    },
+    {
+      "src": "think_ahead.png",
+      "sizes": "150x150",
+      "purpose": "any"
+    }
+  ]
+}
