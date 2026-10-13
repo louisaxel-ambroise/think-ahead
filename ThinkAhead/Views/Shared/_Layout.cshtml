@@ -1,13 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="cache-control" content="max-age=3600" />
+    <meta http-equiv="cache-control" content="max-age=3600">
+    <meta name="description" content="Small chess-based game.">
+    <meta name="keywords" content="Game, Chess, Fun, Side project">
+    <meta name="author" content="Louis-Axel Ambroise">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Think Ahead</title>
     <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-    <link rel="preload" href="/style.css" as="style" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="preload" href="/style.css" as="style" asp-append-version="true" />
+    <link rel="stylesheet" href="/style.css" asp-append-version="true" />
 </head>
 <body>
     <header>
