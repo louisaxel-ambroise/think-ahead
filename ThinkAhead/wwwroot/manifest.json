@@ -4,8 +4,8 @@
   "short_name": "ThinkAhead",
   "start_url": "/",
   "description": "Small chess-based game.",
-  "theme_color": "#f5f5f5",
-  "background_color": "#f5f5f5",
+  "theme_color": "#fafafa",
+  "background_color": "#fafafa",
   "orientation": "portrait",
   "display": "standalone",
   "icons": [
