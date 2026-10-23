@@ -5,6 +5,7 @@ namespace ThinkAhead.Application;
 public sealed class Game(int id, DateTimeOffset createdOn, int seed, string pgn = "")
 {
     public int Id => id;
+    public int Seed => seed;
     public DateTimeOffset CreatedOn => createdOn;
     public string Fen => _board.ToFen();
     public string Pgn => _board.ToPgn();
@@ -17,7 +18,7 @@ public sealed class Game(int id, DateTimeOffset createdOn, int seed, string pgn 
 
     public Game PreviewMove(string move)
     {
-        var projection = new Game(Id, CreatedOn, seed, _board.ToPgn());
+        var projection = new Game(Id, CreatedOn, Seed, _board.ToPgn());
         projection.PlayMove(move);
 
         return projection;
@@ -36,8 +37,8 @@ public sealed class Game(int id, DateTimeOffset createdOn, int seed, string pgn 
 
     private List<Move> GetAvailableMoves()
     {
-        var moveSeed = seed + (_board.MoveIndex << 2) + _board.ExecutedMoves.Count > 0 ? _board.ExecutedMoves[^1].San?.ToCharArray().Aggregate(1, (i, x) => (i << 2) + x) ?? 0 : 0;
-        var random = new Random(moveSeed);
+        var moveSeed = _board.ExecutedMoves.Count > 0 ? (_board.MoveIndex << 2 + _board.ExecutedMoves[^1].San?.ToCharArray().Aggregate(1, (i, x) => (i << 2) + x) ?? 0) : 0;
+        var random = new Random(seed + moveSeed);
         var moves = _board.Moves().OrderBy(p => p.San);
         var selectedMoves = moves.OrderBy(_ => random.Next()).Take(5).Select(move => new Move
         {

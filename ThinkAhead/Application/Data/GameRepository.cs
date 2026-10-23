@@ -28,8 +28,9 @@ public sealed class GameRepository(string connectionString)
         connection.Open();
 
         using var insert = connection.CreateCommand();
-        insert.CommandText = "INSERT INTO Games(CreatedOn, Pgn) VALUES (@CreatedOn, @Pgn)";
+        insert.CommandText = "INSERT INTO Games(CreatedOn, Seed, Pgn) VALUES (@CreatedOn, @Seed, @Pgn)";
         insert.Parameters.AddWithValue("@CreatedOn", game.CreatedOn.ToUnixTimeSeconds());
+        insert.Parameters.AddWithValue("@Seed", game.Seed);
         insert.Parameters.AddWithValue("@Pgn", game.Pgn);
         insert.ExecuteNonQuery();
 
