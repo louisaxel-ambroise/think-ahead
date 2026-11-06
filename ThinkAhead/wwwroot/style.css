@@ -20,7 +20,7 @@ body {
     font-family: math, sans-serif;
     min-height: 100dvh;
     margin: auto;
-    width: clamp(405px, 90dvw, min(700px, calc(65dvh - 35px)));
+    width: min(100dvw, 400px);
     box-shadow: 0 0 12px rgba(0,0,0, 0.3);
     overflow-y: scroll;
 }
